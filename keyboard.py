@@ -1,6 +1,8 @@
+import logging
+import sys
 import threading
-import logging, sys
 import config
+
 
 class KeyMonitor(threading.Thread):
 
@@ -11,8 +13,8 @@ class KeyMonitor(threading.Thread):
         logging.debug('Ready for keyboard input:')
 
     def run(self):
-        while (True):
-            if config.run == False:
+        while True:
+            if not config.run:
                 self.stop()
             input_str = input()
             self.q.put(input_str)

@@ -1,5 +1,6 @@
+import sys
 import config
-import logging, sys
+import logging
 import queue
 from arduino import Arduino
 from keyboard import KeyMonitor
@@ -27,14 +28,14 @@ while True:
         time.sleep(1)
         logging.debug("Experiment is over, closing threads. Press Enter to exit.")
         sys.exit(1)
-    if (keyboard_q.qsize() > 0):
+    if keyboard_q.qsize() > 0:
         input_str = keyboard_q.get()
-        if (input_str == "q"):
+        if input_str == "q":
             config.run = False
             time.sleep(1)
             logging.debug("Experiment is over, closing threads. Press Enter to exit.")
             sys.exit(1)
-        elif (input_str == "a"):
+        elif input_str == "a":
             logging.info(arduino_q.get())
         else:
             logging.debug("Unknown keyboard entry.")

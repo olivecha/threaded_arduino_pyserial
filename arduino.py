@@ -23,10 +23,9 @@ class Arduino(threading.Thread):
                 break
             if self.plugged == True:
                 data_d = self.read_line()
-                time_ = time.time()
                 with self.q.mutex:
                     self.q.queue.clear()
-                self.q.put( [time_, data_d] )
+                self.q.put([data_d])
                 self.arduino.flushInput()
             else:
                 self.test_arduino()
